@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {
-  final List<MenuRowData> firstMenuRow = [
+  List<MenuRowData> firstMenuRow = [
     MenuRowData(Icons.favorite_outline, "Избранное"),
     MenuRowData(Icons.call, "Звонки"),
     MenuRowData(Icons.computer, "Устройства"),
     MenuRowData(Icons.folder, "Папка с чатами"),
   ];
-  final List<MenuRowData> secondMenuRow = [
+  List<MenuRowData> secondMenuRow = [
     MenuRowData(Icons.notifications, "Уведомления и звуки"),
     MenuRowData(Icons.privacy_tip, "Конфиденциальность"),
     MenuRowData(Icons.date_range, "Данные и память"),
     MenuRowData(Icons.brush, "Оформление"),
     MenuRowData(Icons.language, "Язык"),
+    MenuRowData(Icons.sticky_note_2, "Стикеры"),
+  ];
+  List<MenuRowData> thridMenuRow = [
+    MenuRowData(Icons.lock_clock, "Apple Watch"),
+  ];
+  List<MenuRowData> fourtMenuRow = [
+    MenuRowData(Icons.help, "Помощь"),
+    MenuRowData(Icons.question_answer, "Вопросы Telegram"),
   ];
 
   UserProfile();
@@ -26,15 +34,17 @@ class UserProfile extends StatelessWidget {
       ),
       body: Container(
         width: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             _UserInfo(),
             SizedBox(height: 30),
             _MenuWidget(menuRow: firstMenuRow),
             SizedBox(height: 30),
             _MenuWidget(menuRow: secondMenuRow),
+            SizedBox(height: 30),
+            _MenuWidget(menuRow: thridMenuRow),
+            SizedBox(height: 30),
+            _MenuWidget(menuRow: fourtMenuRow),
           ],
         ),
       ),
@@ -97,21 +107,36 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
-      child: Column(
-        children: const [
-          SizedBox(height: 20),
-          _AvatarWidget(),
-          SizedBox(height: 30),
-          _UserNameWidget(),
-          SizedBox(height: 10),
-          _UserPhone(),
-          SizedBox(height: 10),
-          _UserNickName(),
-        ],
-      ),
+    return Stack(
+      children: [
+        Container(
+          color: Colors.white,
+          width: double.infinity,
+          child: Column(
+            children: const [
+              SizedBox(height: 20),
+              _AvatarWidget(),
+              SizedBox(height: 30),
+              _UserNameWidget(),
+              SizedBox(height: 10),
+              _UserPhone(),
+              SizedBox(height: 10),
+              _UserNickName(),
+            ],
+          ),
+        ),
+        Positioned(
+          top: 25,
+          right: 25,
+          child: Text(
+            "Изм.",
+            style: TextStyle(
+              color: Colors.blue,
+              fontSize: 17,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
